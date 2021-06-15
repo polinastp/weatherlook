@@ -14,24 +14,29 @@ def weather_by_city(city_name, num_of_days=1):
         response = requests.get(weather_url, params=params)
         response.raise_for_status()
         weather = response.json()
-        if 'data' in weather:
+        try:
+            current_condition = weather['data']['current_condition'][0]
+            weather_by_day = weather['data']['weather'][0]
+        except(IndexError, KeyError):
+            return False
+        if current_condition and weather_by_day:
             try:
                 weather_info = {
                     'city': weather['data']['request'][0]['query'],
-                    'temp_now': weather['data']['current_condition'][0]['temp_C'],
-                    'feelsLike_now': weather['data']['current_condition'][0]['FeelsLikeC'],
-                    'humidity': weather['data']['current_condition'][0]['humidity'],
-                    'icon': weather['data']['current_condition'][0]['weatherIconUrl'][0]['value'],
-                    'wind_speed_now': weather['data']['current_condition'][0]['windspeedKmph'],
-                    'weather_desk': weather['data']['current_condition'][0]['weatherDesc'][0]['value'],
-                    'sunrise': weather['data']['weather'][0]['astronomy'][0]['sunrise'],
-                    'sunset': weather['data']['weather'][0]['astronomy'][0]['sunset'],
-                    'min_temp': weather['data']['weather'][0]['mintempC'],
-                    'max_temp': weather['data']['weather'][0]['maxtempC'],
-                    'avg_temp': weather['data']['weather'][0]['avgtempC']
+                    'temp_now': current_condition['temp_C'],
+                    'feelsLike_now': current_condition['FeelsLikeC'],
+                    'humidity': current_condition['humidity'],
+                    'icon': current_condition['weatherIconUrl'][0]['value'],
+                    'wind_speed_now': current_condition['windspeedKmph'],
+                    'weather_desk': current_condition['weatherDesc'][0]['value'],
+                    'sunrise': weather_by_day['astronomy'][0]['sunrise'],
+                    'sunset': weather_by_day['astronomy'][0]['sunset'],
+                    'min_temp': weather_by_day['mintempC'],
+                    'max_temp': weather_by_day['maxtempC'],
+                    'avg_temp': weather_by_day['avgtempC']
                 }
                 return weather_info
-            except(IndexError, TypeError):
+            except(IndexError, TypeError, KeyError):
                 return False
         return False
     
