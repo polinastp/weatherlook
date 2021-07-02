@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from webapp.forms import LoginForm
 
 def create_app():
-    app = Flask(__name__, template_folder={})
+    app = Flask(__name__)
     app.config.from_pyfile('config.py')
 
     @app.route('/')
