@@ -28,7 +28,7 @@ def create_app():
             weather_info = weather_by_city(city)
             print(weather_info)
             return render_template('weather.html', page_title=title)
-        return redirect('index.html')
+        return redirect(url_for('index'))
 
 
         
