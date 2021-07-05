@@ -20,10 +20,11 @@
     <div class="container">
       <div class="row">
         <div class="col">
+          
 
         </div>
         <div class="col">
-          <form action="{{ url_for('weather_clothes') }}" method="POST">
+          <form method="POST">
             {{ form.hidden_tag() }}
             <div class="form-group">
               {{ form.city.label }}
