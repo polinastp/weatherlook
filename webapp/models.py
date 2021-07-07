@@ -10,12 +10,12 @@ class User(Base, UserMixin):
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True)
-    username = Column(String(40), index=True, unique=True)
-    password = Column(String(100))
-    gender = Column(String(10))
-    city = Column(String(50))
-    email = Column(String(100), unique=True)
-    role = Column(String(10), index=True)
+    username = Column(String, index=True, unique=True)
+    password = Column(String)
+    gender = Column(String)
+    city = Column(String)
+    email = Column(String, unique=True)
+    role = Column(String, index=True)
 
 
     def set_password(self, password):
