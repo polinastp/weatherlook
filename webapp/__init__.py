@@ -1,9 +1,11 @@
+import re
 from flask import Flask, render_template, redirect, request, url_for, flash
 from flask_login import LoginManager, current_user, login_user, logout_user, login_required
-from webapp.forms import CityForm, LoginForm
+from webapp.forms import CityForm, LoginForm, RegistationForm
 from get_weather import weather_by_city
 from webapp.models import User
 from webapp.db import db_session
+
 
 def create_app():
     app = Flask(__name__)
@@ -18,6 +20,7 @@ def create_app():
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(user_id)
+
 
     @app.route('/', methods=['GET', 'POST'])
     def index():
@@ -40,6 +43,7 @@ def create_app():
             print(weather_info)
             return render_template('weather.html', page_title=title)
         return redirect(url_for('index'))
+
 
     @app.route('/login')
     def login():
@@ -64,11 +68,39 @@ def create_app():
         flash("Неправильное имя пользователя или пароль")
         return redirect(url_for('login'))
 
+
     @app.route('/logout')
     def logout():
         logout_user()
         flash('Вы вышли из профиля')
         return redirect(url_for('index'))
 
+
+    @app.route('/register')
+    def register():
+        if current_user.is_authenticated:
+            return redirect(url_for('weather_clothes'))
+        form = RegistationForm()
+        title = 'Регистрация'
+        return render_template('registration.html', page_title=title, form=form)
+
+
+    @app.route('/process-register', methods=['POST'])
+    def process_register():
+        form = RegistationForm()
+        if form.validate_on_submit():
+            new_user = User(username=form.username.data, email=form.email.data,
+                            gender=form.gender.data, city=form.city.data,
+                            password=form.password.data, role='user')
+            new_user.set_password(form.password.data)
+            db_session.add(new_user)
+            db_session.commit()
+            flash('Регистрация прошла успешно!')
+            return redirect(url_for('login'))
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    flash('Ошибка в поле "{}": - {}'.format(getattr(form, field).label.text,error))
+            return redirect(url_for('register'))
 
     return app
