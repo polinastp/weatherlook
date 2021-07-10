@@ -1,10 +1,11 @@
 import requests
+from webapp.config import WEATHER_API_KEY, WEATHER_URL
 
 
 def weather_by_city(city_name, num_of_days=1):
-    weather_url = 'http://api.worldweatheronline.com/premium/v1/weather.ashx'
+    weather_url = WEATHER_URL
     params = {
-        'key': 'ddc1f1e295a54d1ea20213601213105',
+        'key': WEATHER_API_KEY, 
         'q': city_name,
         'format': 'json',
         'num_of_days': num_of_days,
@@ -44,13 +45,10 @@ def weather_by_city(city_name, num_of_days=1):
                 return weather_info
             except(IndexError, TypeError, KeyError):
                 return False
-        return False
-    
     except(requests.RequestException, ValueError):
+        print('Ошибка подключения')
         return False
-
-
-
+    return False
 
 
 if __name__ == '__main__':

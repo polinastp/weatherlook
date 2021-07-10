@@ -1,8 +1,7 @@
-import re
 from flask import Flask, render_template, redirect, request, url_for, flash
 from flask_login import LoginManager, current_user, login_user, logout_user, login_required
 from webapp.forms import CityForm, LoginForm, RegistationForm
-from get_weather import weather_by_city
+from webapp.get_weather import weather_by_city
 from webapp.models import User
 from webapp.db import db_session
 
@@ -12,7 +11,6 @@ def create_app():
     app.config.from_pyfile('config.py')
 
     
-
     login_manager = LoginManager()
     login_manager.init_app(app)
     login_manager.login_view = 'login'
@@ -37,11 +35,12 @@ def create_app():
     @app.route('/weather', methods=['GET', 'POST'])
     def weather_clothes():
         title = "Погода"
+        weather_form= CityForm()
         if request.method == 'GET':
             city = request.args.get('city')
             weather_info = weather_by_city(city)
             print(weather_info)
-            return render_template('weather.html', page_title=title)
+            return render_template('weather.html', page_title=title, form=weather_form)
         return redirect(url_for('index'))
 
 
@@ -51,6 +50,7 @@ def create_app():
             return redirect(url_for('weather_clothes'))
         title = "Авторизация"
         login_form = LoginForm()
+        city_form = CityForm()
         return render_template('login.html', page_title=title, form=login_form)
 
 
@@ -80,9 +80,10 @@ def create_app():
     def register():
         if current_user.is_authenticated:
             return redirect(url_for('weather_clothes'))
-        form = RegistationForm()
+        registration_form = RegistationForm()
+        city_form = CityForm()
         title = 'Регистрация'
-        return render_template('registration.html', page_title=title, form=form)
+        return render_template('registration.html', page_title=title, form=registration_form)
 
 
     @app.route('/process-register', methods=['POST'])
