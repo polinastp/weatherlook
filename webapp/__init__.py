@@ -40,7 +40,7 @@ def create_app():
             city = request.args.get('city')
             weather_info = weather_by_city(city)
             print(weather_info)
-            return render_template('weather.html', page_title=title, form=weather_form)
+            return render_template('weather.html', page_title=title, form=weather_form, weather_info=weather_info)
         return redirect(url_for('index'))
 
 
