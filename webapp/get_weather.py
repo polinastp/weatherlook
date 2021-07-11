@@ -1,11 +1,11 @@
 import requests
-from webapp.config import WEATHER_API_KEY, WEATHER_URL
+# from webapp.config import WEATHER_API_KEY, WEATHER_URL
 
 
 def weather_by_city(city_name, num_of_days=1):
-    weather_url = WEATHER_URL
+    weather_url = 'http://api.worldweatheronline.com/premium/v1/weather.ashx'
     params = {
-        'key': WEATHER_API_KEY, 
+        'key': 'ddc1f1e295a54d1ea20213601213105', 
         'q': city_name,
         'format': 'json',
         'num_of_days': num_of_days,

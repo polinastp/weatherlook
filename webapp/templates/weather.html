@@ -13,10 +13,16 @@
       {% endif %}
       {% endwith %}
     <div class='col-6'>
-      <h2>Прогноз погоды на сегодня</h2>
+      <h3>Прогноз погоды на сегодня в {{ weather_info.city }} </h3>
+      <img src="{{ weather_info.icon }}" alt="Weather Icon">
       <h4>
-        {% if weather %}
-          Прогноз погоды - {{ weather_info.temp_C }}
+        {% if weather_info %}
+          Прогноз погоды : {{ weather_info.temp_now }}  <br>
+          Чувствуется как : {{ weather_info.feelsLike_now }} <br>
+          Вероятность дождя : {{ weather_info.chanceofrain }}%<br>
+          Восход : {{ weather_info.sunrise }}
+          Закат : {{ weather_info.sunset }}
+
         {% else %}
           Сервис погоды пока не доступен
         {% endif %}
