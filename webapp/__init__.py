@@ -27,20 +27,21 @@ def create_app():
         if city_form.validate_on_submit():
             city = city_form.city.data
             print(city)
-            flash('Введите название города')
             return redirect(url_for('weather_clothes', city=city))
-        return render_template('index.html', page_title=title, form=city_form)  
+        return render_template('index.html', page_title=title, city_form=city_form)  
 
 
     @app.route('/weather', methods=['GET', 'POST'])
     def weather_clothes():
         title = "Погода"
-        weather_form= CityForm()
+        city_form= CityForm()
         if request.method == 'GET':
             city = request.args.get('city')
             weather_info = weather_by_city(city)
-            print(weather_info)
-            return render_template('weather.html', page_title=title, form=weather_form, weather_info=weather_info)
+            if weather_info:
+                print(weather_info)
+                return render_template('weather.html', page_title=title, city_form=city_form, weather_info=weather_info)  
+        flash('Введите название города')
         return redirect(url_for('index'))
 
 
@@ -51,7 +52,7 @@ def create_app():
         title = "Авторизация"
         login_form = LoginForm()
         city_form = CityForm()
-        return render_template('login.html', page_title=title, form=login_form)
+        return render_template('login.html', page_title=title, form=login_form, city_form=city_form)
 
 
     @app.route('/process-login', methods = ['POST'])
@@ -83,7 +84,7 @@ def create_app():
         registration_form = RegistationForm()
         city_form = CityForm()
         title = 'Регистрация'
-        return render_template('registration.html', page_title=title, form=registration_form)
+        return render_template('registration.html', page_title=title, form=registration_form, city_form=city_form)
 
 
     @app.route('/process-register', methods=['POST'])

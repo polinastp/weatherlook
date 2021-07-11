@@ -1,23 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% include 'menu.html' %}  
+ 
     <div class='container'>
       <br>
         <p>Программа покажет вам погоду и подберёт одежду</p>
     </div>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-danger" role="alert">
+          {{ message }}
+        </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
     <div class="container">
       <div class="row">
         <div class="col">
         </div>
         <div class="col">
           <form method="POST">
-            {{ form.hidden_tag() }}
+            {{ city_form.hidden_tag() }}
             <div class="form-group">
-              {{ form.city.label }}
-              {{ form.city() }}<br>
+              {{ city_form.city.label }}
+              {{ city_form.city() }}<br>
             </div>
-            {{ form.submit }}
+            {{ city_form.submit }}
           </form>
         </div>
         <div class="col">
