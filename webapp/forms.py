@@ -10,8 +10,8 @@ class LoginForm(FlaskForm):
 
 
 class CityForm(FlaskForm):
-    city = StringField('Введите город', validators=[DataRequired(), Length(3, 20)], render_kw={"class": "form-control"})
-    submit = SubmitField('Узнать погоду', validators=[DataRequired()], render_kw={"class": "btn btn-primary"})
+    city = StringField('', validators=[DataRequired(), Length(3, 20)], render_kw={"class": "form-control", "placeholder" : "Введите город" })
+    submit = SubmitField('Узнать погоду', validators=[DataRequired()], render_kw={"class": "btn btn-primary"}) 
 
 
 class RegistationForm(FlaskForm):
