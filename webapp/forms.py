@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from webapp.models import User
 
@@ -17,7 +17,7 @@ class CityForm(FlaskForm):
 class RegistationForm(FlaskForm):
     username = StringField('Username', validators = [DataRequired()], render_kw={"class": "form-control"})
     email = StringField('Email', validators = [DataRequired(), Email()], render_kw={"class": "form-control"})
-    gender = StringField('Ваш пол: female/male', validators = [DataRequired()], render_kw={"class": "form-control"})
+    gender = SelectField('Ваш пол: female/male', choices=[('female', 'female'), ('male', 'male')], render_kw={"class": "form-control"})
     city = StringField('Город', validators = [DataRequired()], render_kw={"class": "form-control"})
     password = PasswordField('Пароль', validators = [DataRequired()], render_kw={"class": "form-control"})
     password2 = PasswordField('Повторите пароль', validators = [DataRequired(), EqualTo('password')], render_kw={"class": "form-control"})
@@ -35,7 +35,3 @@ class RegistationForm(FlaskForm):
         if users_count > 0:
             raise ValidationError('Пользователь с такой электронной почтой уже зарегистрирован')
 
-
-    def validate_gender(self, gender):
-        if gender.data != 'male' and gender.data != 'female':
-            raise ValidationError('Введите пожалуйста male или female')
