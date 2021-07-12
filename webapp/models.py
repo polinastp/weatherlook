@@ -37,14 +37,14 @@ class Clothes(Base):
     name = Column(String, nullable=False)
     gender = Column(String, nullable=False)
     cloth_type = Column(String, nullable=False)
-    temp_tag = Column(ARRAY(String), nullable=False)
-    rain = Column(Boolean, nullable=False)
-    sun = Column(Boolean, nullable=False)
-    icon_path = Column(String, unique=True, nullable=False)
+    temp_tag = Column(ARRAY(String), nullable=False, default=[])
+    rain = Column(Boolean, nullable=False, default=False)
+    sun = Column(Boolean, nullable=False, default=False)
+    icon_path = Column(String, nullable=False)
 
 
     def __repr__(self):
-        return f'Clothes {self.name}, {self.temp_tag}, {self.icon_path}'
+        return f'Clothes {self.id}, {self.name}'
 
 
 if __name__ == '__main__':
