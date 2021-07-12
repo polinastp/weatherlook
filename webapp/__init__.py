@@ -26,8 +26,9 @@ def create_app():
         city_form = CityForm()
         if city_form.validate_on_submit():
             city = city_form.city.data
-            print(city)
-            return redirect(url_for('weather_clothes', city=city))
+            gender = city_form.gender.data
+            print(city, gender)
+            return redirect(url_for('weather_clothes', city=city, gender=gender))
         return render_template('index.html', page_title=title, city_form=city_form)  
 
 
@@ -37,6 +38,8 @@ def create_app():
         city_form= CityForm()
         if request.method == 'GET':
             city = request.args.get('city')
+            gender = request.args.get('gender')
+            print(gender)
             weather_info = weather_by_city(city)
             if weather_info:
                 print(weather_info)
