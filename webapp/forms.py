@@ -11,7 +11,7 @@ class LoginForm(FlaskForm):
 
 class CityForm(FlaskForm):
     city = StringField('', validators=[DataRequired(), Length(3, 20)], render_kw={"class": "form-control", "placeholder" : "Введите город" })
-    gender = SelectField('', choices=[('female', 'female'), ('male', 'male')], render_kw={"class": "form-control"})
+    gender = SelectField('', choices=[('female', 'Девушка'), ('male', 'Парень')], render_kw={"class": "form-control"})
     submit = SubmitField('Узнать погоду', validators=[DataRequired()], render_kw={"class": "btn btn-primary"}) 
 
 
