@@ -20,11 +20,13 @@
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-primary" type="submit">Search</button>
         </form> -->
-        <form class="d-flex" method="POST">
-            {{ form.hidden_tag() }}
-            {{ form.city.label }}
-            {{ form.city() }}
-            {{ form.submit }}
+        <form class="d-flex" action="{{ url_for('index') }}" method="POST">
+            {{ city_form.hidden_tag() }}
+            {{ city_form.city.label }}
+            {{ city_form.city() }}
+            {{ city_form.gender.label }}
+            {{ city_form.gender() }}
+            {{ city_form.submit }}
         </form>
       </div>
     </div>
