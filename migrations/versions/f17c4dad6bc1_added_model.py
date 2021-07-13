@@ -1,8 +1,8 @@
-"""Added clothes model
+"""added model
 
-Revision ID: 268146b5ffe9
+Revision ID: f17c4dad6bc1
 Revises: 
-Create Date: 2021-07-13 12:18:39.292802
+Create Date: 2021-07-13 23:27:17.165843
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '268146b5ffe9'
+revision = 'f17c4dad6bc1'
 down_revision = None
 branch_labels = None
 depends_on = None
