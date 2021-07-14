@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Boolean, ARRAY
+from sqlalchemy import Column, Integer, String, Boolean
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from webapp.db import Base, engine
@@ -37,7 +37,11 @@ class Clothes(Base):
     name = Column(String, nullable=False)
     gender = Column(String, nullable=False)
     cloth_type = Column(String, nullable=False)
-    temp_tag = Column(ARRAY(String), nullable=False, default=[])
+    temp_freezing = Column(Boolean, nullable=False, default=False)
+    temp_cold = Column(Boolean, nullable=False, default=False)
+    temp_chilly = Column(Boolean, nullable=False, default=False)
+    temp_warm = Column(Boolean, nullable=False, default=False)
+    temp_hot = Column(Boolean, nullable=False, default=False)
     rain = Column(Boolean, nullable=False, default=False)
     sun = Column(Boolean, nullable=False, default=False)
     icon_path = Column(String, nullable=False)
