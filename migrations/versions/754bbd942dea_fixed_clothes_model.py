@@ -1,8 +1,8 @@
-"""added model
+"""Fixed clothes model
 
-Revision ID: f17c4dad6bc1
+Revision ID: 754bbd942dea
 Revises: 
-Create Date: 2021-07-13 23:27:17.165843
+Create Date: 2021-07-14 12:18:04.752583
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'f17c4dad6bc1'
+revision = '754bbd942dea'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,7 +23,11 @@ def upgrade():
     sa.Column('name', sa.String(), nullable=False),
     sa.Column('gender', sa.String(), nullable=False),
     sa.Column('cloth_type', sa.String(), nullable=False),
-    sa.Column('temp_tag', sa.ARRAY(sa.String()), nullable=False),
+    sa.Column('temp_freezing', sa.Boolean(), nullable=False),
+    sa.Column('temp_cold', sa.Boolean(), nullable=False),
+    sa.Column('temp_chilly', sa.Boolean(), nullable=False),
+    sa.Column('temp_warm', sa.Boolean(), nullable=False),
+    sa.Column('temp_hot', sa.Boolean(), nullable=False),
     sa.Column('rain', sa.Boolean(), nullable=False),
     sa.Column('sun', sa.Boolean(), nullable=False),
     sa.Column('icon_path', sa.String(), nullable=False),
