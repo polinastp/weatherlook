@@ -6,7 +6,9 @@ from webapp.db import db_session
 
 def save_data(row):
     clothes = Clothes(name=row['name'], gender=row['gender'],
-    cloth_type=row['cloth_type'], temp_tag=row['temp_tag'].split(';'), 
+    cloth_type=row['cloth_type'], temp_freezing=bool(int(row['temp_freezing'])),
+    temp_cold=bool(int(row['temp_cold'])), temp_chilly=bool(int(row['temp_chilly'])),
+    temp_warm=bool(int(row['temp_warm'])), temp_hot=bool(int(row['temp_hot'])),
     rain=bool(int(row['rain'])), sun=bool(int(row['sun'])), icon_path=row['icon_path'])
     
     db_session.add(clothes)
@@ -22,4 +24,4 @@ def read_csv(filename):
 
     
 if __name__ == "__main__":
-    read_csv('weatherlook.csv')
+    read_csv('weatherlook1.csv')
