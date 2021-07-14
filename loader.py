@@ -16,8 +16,9 @@ def save_data(row):
 
 def read_csv(filename):
     with open(filename, 'r', encoding='utf-8') as f:
-        fields = ['name', 'gender', 'cloth_type', 'temp_tag',
-         'rain', 'sun', 'icon_path']
+        fields = ['name', 'gender', 'cloth_type', 'temp_freezing',
+        'temp_cold', 'temp_chilly', 'temp_warm', 'temp_hot',
+        'rain', 'sun', 'icon_path']
         reader = csv.DictReader(f, fields, delimiter =',')
         for row in reader:
             save_data(row)
