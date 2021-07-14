@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, request, url_for, flash
 from flask_login import LoginManager, current_user, login_user, logout_user, login_required
 from webapp.forms import CityForm, LoginForm, RegistationForm
 from webapp.get_weather import weather_by_city
+from query_clothes import get_clothes
 from webapp.models import User
 from webapp.db import db_session
 
@@ -41,9 +42,11 @@ def create_app():
             gender = request.args.get('gender')
             print(gender)
             weather_info = weather_by_city(city)
-            if weather_info:
+            if weather_info and gender:
+                clothes_info = get_clothes(gender, weather_info)
                 print(weather_info)
-                return render_template('weather.html', page_title=title, city_form=city_form, weather_info=weather_info)  
+                print(clothes_info)
+                return render_template('weather.html', page_title=title, city_form=city_form, weather_info=weather_info, clothes_info=clothes_info)  
         flash('Введите название города')
         return redirect(url_for('index'))
 
