@@ -9,17 +9,27 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/">Главная</a>
           </li>
+          
+        </ul>
+        <!-- <form class="d-flex" method="POST">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+        </form> -->
+        <ul class="navbar-nav">
+          {% if current_user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="logout">Logout</a>
+          </li>
+          {% else %}
           <li class="nav-item">
             <a class="nav-link" href="login">Login</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="register" tabindex="-1" aria-disabled="true">Регистрация</a>
           </li>
-        </ul>
-        <!-- <form class="d-flex" method="POST">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-primary" type="submit">Search</button>
-        </form> -->
+          {% endif %}
+        </li>
+      </ul>
         <form class="d-flex" action="{{ url_for('index') }}" method="POST">
             {{ city_form.hidden_tag() }}
             {{ city_form.city.label }}
@@ -28,6 +38,8 @@
             {{ city_form.gender() }}
             {{ city_form.submit }}
         </form>
+        
+        
       </div>
     </div>
   </nav>

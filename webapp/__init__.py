@@ -28,7 +28,7 @@ def create_app():
         if city_form.validate_on_submit():
             city = city_form.city.data
             gender = city_form.gender.data
-            print(city, gender)
+            #print(city, gender)
             return redirect(url_for('weather_clothes', city=city, gender=gender))
         return render_template('index.html', page_title=title, city_form=city_form)  
 
@@ -40,7 +40,7 @@ def create_app():
         if request.method == 'GET':
             city = request.args.get('city')
             gender = request.args.get('gender')
-            print(gender)
+            #print(gender)
             weather_info = weather_by_city(city)
             if weather_info and gender:
                 clothes_info = get_clothes(gender, weather_info)
@@ -65,12 +65,15 @@ def create_app():
     def process_login():
         form = LoginForm()
 
+
         if form.validate_on_submit():
             user = User.query.filter(User.username == form.username.data).first()
+            city = user.city
+            gender = user.gender
             if user and user.check_password(form.password.data):
                 login_user(user)
                 flash("Вы успешно вошли в профиль")
-                return redirect(url_for('weather_clothes'))
+                return redirect(url_for('weather_clothes', city=city, gender=gender))
 
         flash("Неправильное имя пользователя или пароль")
         return redirect(url_for('login'))

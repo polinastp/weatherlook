@@ -33,13 +33,15 @@ def weather_by_city(city_name, num_of_days=1):
                     'humidity_now': current_condition['humidity'],
                     'icon': current_condition['weatherIconUrl'][0]['value'],
                     'wind_speed_now': current_condition['windspeedKmph'],
-                    'weather_desk_now': current_condition['weatherDesc'][0]['value'],
+                    'weather_desk_now': current_condition['lang_ru'][0]['value'],
+                    'weather_desk_now_ru': current_condition['weatherDesc'][0]['value'],
                     'sunrise': weather_by_day['astronomy'][0]['sunrise'],
                     'sunset': weather_by_day['astronomy'][0]['sunset'],
                     'min_temp': weather_by_day['mintempC'],
                     'max_temp': weather_by_day['maxtempC'],
                     'avg_temp': weather_by_day['avgtempC'],
                     'weather_desk_day': weather_by_day['hourly'][0]['weatherDesc'][0]['value'],
+                    'weather_desk_day_ru': weather_by_day['hourly'][0]['lang_ru'][0]['value'],
                     'chanceofrain': weather_by_day['hourly'][0]['chanceofrain']
                 }
                 return weather_info
