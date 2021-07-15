@@ -51,5 +51,5 @@ def weather_by_city(city_name, num_of_days=1):
     return False
 
 
-if __name__ == '__main__':
-    print(weather_by_city('Moscow,Russia'))
+# if __name__ == '__main__':
+#     print(weather_by_city('Moscow,Russia'))
