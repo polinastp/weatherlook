@@ -2,20 +2,27 @@
 
 {% block content %}
  
-    <div class='container'>
+    <div class='container' style="text-align: center;">
       <br>
-        <p>Программа покажет вам погоду и подберёт одежду</p>
+      <br>
+      <h4>Сервис покажет вам погоду и подберёт одежду</h4>
+      <hr>
     </div>
     {% with messages = get_flashed_messages() %}
       {% if messages %}
         {% for message in messages %}
-        <div class="alert alert-danger" role="alert">
+        <div class="alert alert-primary" role="alert">
           {{ message }}
         </div>
         {% endfor %}
       {% endif %}
     {% endwith %}
     <div class="container">
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
       <div class="row">
         <div class="col">
         </div>
@@ -31,7 +38,10 @@
               {{ city_form.gender.label }}
               {{ city_form.gender() }}<br>
             </div>
-            {{ city_form.submit }}
+            <div class="text-center">
+              {{ city_form.submit }}
+            </div>
+
           </form>
         </div>
         <div class="col">
