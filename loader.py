@@ -25,4 +25,4 @@ def read_csv(filename):
 
     
 if __name__ == "__main__":
-    read_csv('weatherlook1.csv')
+    read_csv('weatherlook2.csv')

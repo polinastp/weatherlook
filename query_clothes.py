@@ -15,7 +15,7 @@ def get_clothes(gender, weather_info):
     HOT = 20 < int(weather_info['temp_now']) <= 50
     RAIN = int(weather_info['chanceofrain']) 
     SUN = weather_info['weather_desk_now']
-    print(weather_info)
+    #print(weather_info)
 
     try:
         if gender and FREEZING:
