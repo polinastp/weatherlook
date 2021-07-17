@@ -1,49 +1,58 @@
 {% extends "base.html" %}
 
 {% block content %}
+<br>
+<br>
+<div class="text-center" >
+    <h1>{{ page_title }}</h1>
+    {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                  {% for message in messages %}
+                  <div class="alert alert-danger" role="alert">
+                      {{ message }}
+                  </div>
+                  {% endfor %}
+              {% endif %}
+          {% endwith %}
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col">
+                <form action="{{ url_for('process_register') }}" method="POST">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ form.username.label }}
+                        {{ form.username() }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.email.label }}
+                        {{ form.email() }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.gender.label }}
+                        {{ form.gender() }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.city.label }}
+                        {{ form.city() }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.password.label }}
+                        {{ form.password() }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.password2.label }}
+                        {{ form.password2() }}<br>
+                    </div>
+                    {{ form.submit() }}
+                </form>
+            </div>
+            <div class="col">
+      
+            </div>
 
-      <h1>{{ page_title }}</h1>
-      {% with messages = get_flashed_messages() %}
-				{% if messages %}
-					{% for message in messages %}
-					<div class="alert alert-danger" role="alert">
-						{{ message }}
-					</div>
-					{% endfor %}
-				{% endif %}
-			{% endwith %}
-      <div class="row">
-        <div class="col-4">
-            <form action="{{ url_for('process_register') }}" method="POST">
-                {{ form.hidden_tag() }}
-                <div class="form-group">
-                    {{ form.username.label }}
-                    {{ form.username() }}
-                </div>
-                <div class="form-group">
-                    {{ form.email.label }}
-                    {{ form.email() }}
-                </div>
-                <div class="form-group">
-                    {{ form.gender.label }}
-                    {{ form.gender() }}
-                </div>
-                <div class="form-group">
-                    {{ form.city.label }}
-                    {{ form.city() }}
-                </div>
-                <div class="form-group">
-                    {{ form.password.label }}
-                    {{ form.password() }}
-                </div>
-                <div class="form-group">
-                    {{ form.password2.label }}
-                    {{ form.password2() }}<br>
-                </div>
-                {{ form.submit() }}
-            </form>
-        </div>
-        <div class="col-8">
+    </div>
 
-        </div>
+</div>
+
 {% endblock %}

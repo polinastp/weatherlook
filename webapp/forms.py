@@ -4,24 +4,24 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationE
 from webapp.models import User
 
 class LoginForm(FlaskForm):
-    username = StringField('Username', validators = [DataRequired()], render_kw={"class": "form-control"})
-    password = PasswordField('Пароль', validators = [DataRequired()], render_kw={"class": "form-control"})
+    username = StringField('', validators = [DataRequired()], render_kw={"class": "form-control", "placeholder" : "Имя пользователя"})
+    password = PasswordField('', validators = [DataRequired()], render_kw={"class": "form-control", "placeholder" : 'Пароль'})
     submit = SubmitField('Войти',  render_kw={"class":"btn btn-primary"})
 
 
 class CityForm(FlaskForm):
     city = StringField('', validators=[DataRequired(), Length(3, 20)], render_kw={"class": "form-control", "placeholder" : "Введите город" })
     gender = SelectField('', choices=[('female', 'Девушка'), ('male', 'Парень')], render_kw={"class": "form-control"})
-    submit = SubmitField('Узнать погоду', validators=[DataRequired()], render_kw={"class": "btn btn-outline-primary"}) 
+    submit = SubmitField('Узнать погоду', validators=[DataRequired()], render_kw={"class": "btn btn-primary"}) 
 
 
 class RegistationForm(FlaskForm):
-    username = StringField('Username', validators = [DataRequired()], render_kw={"class": "form-control"})
-    email = StringField('Email', validators = [DataRequired(), Email()], render_kw={"class": "form-control"})
-    gender = SelectField('Ваш пол: female/male', choices=[('female', 'female'), ('male', 'male')], render_kw={"class": "form-control"})
-    city = StringField('Город', validators = [DataRequired()], render_kw={"class": "form-control"})
-    password = PasswordField('Пароль', validators = [DataRequired()], render_kw={"class": "form-control"})
-    password2 = PasswordField('Повторите пароль', validators = [DataRequired(), EqualTo('password')], render_kw={"class": "form-control"})
+    username = StringField('', validators = [DataRequired()], render_kw={"class": "form-control", "placeholder" : "Имя пользователя"})
+    email = StringField('', validators = [DataRequired(), Email()], render_kw={"class": "form-control", "placeholder" : "Почта"})
+    gender = SelectField('', choices=[('female', 'female'), ('male', 'male')], render_kw={"class": "form-control", "placeholder" : "Ваш пол: female/male"})
+    city = StringField('', validators = [DataRequired()], render_kw={"class": "form-control" , "placeholder" : "Город"})
+    password = PasswordField('', validators = [DataRequired()], render_kw={"class": "form-control", "placeholder" : 'Пароль'})
+    password2 = PasswordField('', validators = [DataRequired(), EqualTo('password')], render_kw={"class": "form-control", "placeholder" : 'Повторите пароль' })
     submit = SubmitField('Регистрация',  render_kw={"class":"btn btn-primary"})
 
 
