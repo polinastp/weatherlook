@@ -53,8 +53,11 @@ def create_app():
 
     @app.route('/login')
     def login():
+        form = LoginForm()
         if current_user.is_authenticated:
-            return redirect(url_for('weather_clothes'))
+            city = current_user.city
+            gender = current_user.gender
+            return redirect(url_for('weather_clothes', city=city, gender=gender))
         title = "Авторизация"
         login_form = LoginForm()
         city_form = CityForm()
